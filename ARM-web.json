@@ -52,8 +52,7 @@
     }
   },
   "variables": {
-    "uniqueStorageName": "[concat(parameters('storagePrefix'), uniqueString(resourceGroup().id))]",
-    "webAppPortalName": "[concat(parameters('webAppName'), uniqueString(resourceGroup().id))]"
+    "uniqueStorageName": "[concat(parameters('storagePrefix'), uniqueString(resourceGroup().id))]"
   },
   "resources": [
     {
@@ -94,7 +93,7 @@
     {
       "type": "Microsoft.Web/sites",
       "apiVersion": "2016-08-01",
-      "name": "[variables('webAppPortalName')]",
+      "name": "[parameters('webAppName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[parameters('appServicePlanName')]"
@@ -110,9 +109,5 @@
     }
   ],
   "outputs": {
-    "storageEndpoint": {
-      "type": "object",
-      "value": "[reference(variables('uniqueStorageName')).primaryEndpoints]"
-    }
   }
 }
